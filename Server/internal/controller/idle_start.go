@@ -60,7 +60,7 @@ func HandleIdleStart(w http.ResponseWriter, r *http.Request) {
 		&user.AttackUp,
 		&user.SpeedUp,
 		&user.HPRegainUp,
-		//&user.EvolutionStage,
+		&user.EvolutionStage,
 		&user.IsIdle,
 		&user.IdleStartedAt,
 		&user.CreatedAt,

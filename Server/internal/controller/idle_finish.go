@@ -18,7 +18,7 @@ type IdleFinishRequest struct {
 type IdleFinishResponse struct {
 	User        *model.User `json:"user"`
 	ExpGained   int64       `json:"exp_gained"`
-	Idleminutes int         `json:"idle_minutes"`
+	IdleMinutes int         `json:"idle_minutes"`
 }
 
 // HandleIdleFinish 放置終了・報酬確定
@@ -61,7 +61,7 @@ func HandleIdleFinish(w http.ResponseWriter, r *http.Request) {
 		&user.AttackUp,
 		&user.SpeedUp,
 		&user.HPRegainUp,
-		//&user.EvolutionStage,
+		&user.EvolutionStage,
 		&user.IsIdle,
 		&user.IdleStartedAt,
 		&user.CreatedAt,
@@ -110,6 +110,6 @@ func HandleIdleFinish(w http.ResponseWriter, r *http.Request) {
 	SendSuccess(w, IdleFinishResponse{
 		User:        &user,
 		ExpGained:   expGained,
-		Idleminutes: idleMinutes,
+		IdleMinutes: idleMinutes,
 	})
 }
