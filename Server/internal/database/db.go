@@ -17,8 +17,9 @@ type Config struct {
 
 var DB *sql.DB
 
-// Initialize データベース接続　初期化
+// Initialize データベース初期化
 func Initialize(config Config) error {
+	// DSN（接続文字列）を作成
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?parseTime=true&loc=Local",
 		config.User,
 		config.Password,
@@ -27,6 +28,7 @@ func Initialize(config Config) error {
 		config.Database,
 	)
 
+	//データベースに接続
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return fmt.Errorf("failed to open database: %w", err)
@@ -35,11 +37,12 @@ func Initialize(config Config) error {
 	db.SetMaxOpenConns(25)
 	db.SetMaxIdleConns(25)
 	db.SetConnMaxLifetime(5 * time.Minute)
-	// 接続確認
+
+	// 接続確認（テスト）
 	if err := db.Ping(); err != nil {
 		return fmt.Errorf("failed to ping database: %w", err)
 	}
-	DB = db
+	DB = db //グローバル変数に保存
 	log.Println("Database connection established")
 	return nil
 }
