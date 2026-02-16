@@ -20,13 +20,14 @@ func main() {
 		Database: getEnv("DB_NAME", "idle_game"),
 	}
 
-	// データベース初期化
+	// データベースに接続
 	if err := database.Initialize(dbConfig); err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
+	// サーバー終了時にDB接続
 	defer database.Close()
 
-	// ルーティング設定
+	// ルーティング設定（どのURLで度の処理をするか）
 	mux := http.NewServeMux()
 
 	// 認証
@@ -58,7 +59,7 @@ func main() {
 	}
 }
 
-// conrsMiddleware CORS対応のミドルウェア
+// corsMiddleware CORS対応のミドルウェア
 func corsMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
