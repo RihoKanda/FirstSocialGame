@@ -7,17 +7,25 @@ import (
 
 	"github.com/RihoKanda/FirstSocialGame/Server/internal/controller"
 	"github.com/RihoKanda/FirstSocialGame/Server/internal/database"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 // ルーティング設定
 func main() {
 	// データベース接続設定
+	// dbConfig := database.Config{
+	// 	Host:     getEnv("DB_HOST", "localhost"),
+	// 	Port:     3306,
+	// 	User:     getEnv("DB_USER", "root"),
+	// 	Password: getEnv("DB_PASSWORD", ""),
+	// 	Database: getEnv("DB_NAME", "idle_game"),
+	// }
 	dbConfig := database.Config{
-		Host:     getEnv("DB_HOST", "localhost"),
-		Port:     3306,
-		User:     getEnv("DB_USER", "root"),
-		Password: getEnv("DB_PASSWORD", ""),
-		Database: getEnv("DB_NAME", "idle_game"),
+		Host:     "localhost",
+		Port:     3307,
+		User:     "user",
+		Password: "pass",
+		Database: "idle_game",
 	}
 
 	// データベースに接続
